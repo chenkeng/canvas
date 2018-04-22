@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        canvas.width = 700;
+        canvas.height = 480;
+        var context = canvas.getContext('2d');
+        var spaceShip = new Image();
+        spaceShip.src = "./imgs/abc.png"; // 代码中调用图像之前，要确定图像已正确加载并准备就绪。 
+        spaceShip.addEventListener('load', eventShipLoaded, false);
+
+        function eventShipLoaded() {
+            drawScreen();
+        }
+        // var src = document.getElementById('No2');
+
+        // console.log(src);
+
+        function drawScreen() { // drawImage(Image,dx,dy,dw,dh);dx，dy:画布的目标位置;dw,dh:图像缩放的新的宽度和高度
+            // context.drawImage(spaceShip, 0, 0);
+            console.log(spaceShip)
+            // context.drawImage(spaceShip, 0, 34, 32, 32);
+            context.drawImage(spaceShip, 200, 80, 400, 200);
+            context.drawImage(spaceShip, 20, 20, 500, 500, 0, 0, 200, 200);
+            context.drawImage(spaceShip, 570, 20, 500, 500, 0, 200, 200, 200);
+
+        }
+    </script>
+</body>
+
+</html>
