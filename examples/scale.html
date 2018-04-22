@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        canvas.width = 300;
+        canvas.height = 300;
+        var context = canvas.getContext('2d');
+        context.strokeStyle = '#fc0';
+        context.lineWidth = 1.5;
+        context.fillRect(0, 0, 300, 300);
+
+        // Uniform scaling
+        context.save();
+        context.translate(50, 50);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(100, 0);
+        context.scale(.75, .75);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(133.333, 0);
+        context.scale(0.75, 0.75);
+        drawSpirograph(context, 22, 6, 5);
+        context.restore();
+
+        // Non-uniform scaling (y direction)
+        context.strokeStyle = "#0cf";
+        context.save()
+        context.translate(50, 150);
+        context.scale(1, 0.75);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(100, 0);
+        context.scale(1, 0.75);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(100, 0);
+        context.scale(1, 0.75);
+        drawSpirograph(context, 22, 6, 5);
+        context.restore();
+
+        // Non-uniform scaling (x direction)
+        context.strokeStyle = "#cf0";
+        context.save()
+        context.translate(50, 250);
+        context.scale(0.75, 1);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(133.333, 0);
+        context.scale(0.75, 1);
+        drawSpirograph(context, 22, 6, 5);
+
+        context.translate(177.777, 0);
+        context.scale(0.75, 1);
+        drawSpirograph(context, 22, 6, 5);
+        context.restore();
+
+        function drawSpirograph(ctx, R, r, O) {
+            var x1 = R - O;
+            var y1 = 0;
+            var i = 1;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            do {
+                if (i > 20000) break;
+                var x2 = (R + r) * Math.cos(i * Math.PI / 72) - (r + O) * Math.cos(((R + r) / r) * (i * Math.PI / 72))
+                var y2 = (R + r) * Math.sin(i * Math.PI / 72) - (r + O) * Math.sin(((R + r) / r) * (i * Math.PI / 72))
+                ctx.lineTo(x2, y2);
+                x1 = x2;
+                y1 = y2;
+                i++;
+            } while (x2 != R - O && y2 != 0);
+            ctx.stroke();
+        }
+    </script>
+</body>
+
+</html>
